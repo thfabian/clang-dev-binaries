@@ -50,11 +50,18 @@ cmake .. -Thost=x64 -G "Visual Studio 15 2017 Win64"^
 
 :: Release
 msbuild.exe INSTALL.vcxproj /m:6 /p:Configuration=Release
-move %build_path%\install %install_path%\Release
+xcopy /E %build_path%\install %install_path%\Release\
+
+@RD /S /Q %install_path%\Release\bin
+@RD /S /Q %install_path%\Release\libexec
+@RD /S /Q %install_path%\Release\bin
+@RD /S /Q %install_path%\Release\msbuild-bin
+@RD /S /Q %install_path%\Release\share
+@RD /S /Q %install_path%\Release\tools
 
 :: Debug
 ::msbuild.exe INSTALL.vcxproj /m:6 /p:Configuration=Debug
-::move %build_path%\install %install_path%\Debug
+::copy /E %build_path%\install %install_path%\Debug\
 
 popd
 

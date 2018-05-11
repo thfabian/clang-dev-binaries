@@ -30,10 +30,6 @@ pushd %llvm_path%\tools
 git clone -b release_%version_short% https://git.llvm.org/git/clang.git/
 popd
 
-pushd %llvm_path%\projects
-git clone -b release_%version_short% https://git.llvm.org/git/compiler-rt.git/
-popd
-
 popd
 
 :: >> Build
@@ -41,9 +37,7 @@ popd
 set "build_path=%llvm_path%\build-vs2017"
 set "install_path=%~dp0\llvm-%version%"
 
-@RD /S /Q %build_path%
-
-mkdir %build_path%
+if not exist %build_path% mkdir %build_path%
 pushd %build_path%
 
 set "build_path_forward=%build_path:\=/%"
